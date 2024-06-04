@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
+import 'package:taskify/provider/date_time_provider.dart';
 import 'package:taskify/provider/radio_provider.dart';
 
 import '../constants/app_styles.dart';
@@ -18,6 +20,8 @@ class AddNewTaskModel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // final radioCategory = ref.watch(radioProvider);
+    final dateProv = ref.watch(dateProvider);
+    final timeProv = ref.watch(timeProvider);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       height: MediaQuery.of(context).size.height * 0.70,
@@ -105,19 +109,48 @@ class AddNewTaskModel extends ConsumerWidget {
           ),
           const Gap(12),
           //Date and Time Section
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               DateAndTimeWidget(
                 titleText: 'Date',
-                valueText: 'DD/MM/YYYY',
+                // valueText: 'DD/MM/YYYY',
+                valueText: dateProv,
                 iconSection: CupertinoIcons.calendar,
+                onTap: () async {
+                  final getValue = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2023),
+                    lastDate: DateTime(2030),
+                  );
+
+                  if (getValue != null) {
+                    final format = DateFormat.yMd();
+                    // print(format.format(getValue));
+                    ref.read(dateProvider.notifier).update(
+                          (state) => format.format(getValue),
+                        );
+                  }
+                },
               ),
-              Gap(22),
+              const Gap(22),
               DateAndTimeWidget(
                 titleText: 'Time',
-                valueText: 'HH : MM',
+                // valueText: 'HH : MM',
+                valueText: timeProv,
                 iconSection: CupertinoIcons.clock,
+                onTap: () async {
+                  final getTime = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                  );
+                  if (getTime != null) {
+                    ref.read(timeProvider.notifier).update(
+                          (state) => getTime.format(context),
+                        );
+                  }
+                },
               ),
             ],
           ),
