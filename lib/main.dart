@@ -10,7 +10,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,10 +21,39 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
   });
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String greeting = 'Good Morning';
+
+  @override
+  void initState() {
+    super.initState();
+    _updateGreeting();
+  }
+
+  void _updateGreeting() {
+    final now = DateTime.now();
+    final hour = now.hour;
+
+    if (hour >= 5 && hour < 12) {
+      greeting = 'Good Morning';
+    } else if (hour >= 12 && hour < 17) {
+      greeting = 'Good Afternoon';
+    } else if (hour >= 17 && hour < 22) {
+      greeting = 'Good Evening';
+    } else {
+      greeting = 'Good Night';
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +69,7 @@ class HomePage extends StatelessWidget {
             child: Image.asset('assets/images/my-avatar.png'),
           ),
           title: Text(
-            'Good Morning',
+            greeting,
             style: TextStyle(
               fontSize: 12,
               color: Colors.amber.shade200,
