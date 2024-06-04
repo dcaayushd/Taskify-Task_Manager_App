@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:taskify/common/show_model.dart';
+
+import '../common/show_model.dart';
+
+import '../widgets/card_todo_list_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -158,9 +161,17 @@ class _HomePageState extends State<HomePage> {
                       //   color: Colors.grey,
                       // ),
                     ),
-                  )
+                  ),
                 ],
-              )
+              ),
+              const Gap(20),
+              //Card List Task
+              ListView.builder(
+                itemCount: 1,
+                shrinkWrap: true,
+                itemBuilder: (context, index) =>
+                    const Expanded(child: CardTodoListWidget()),
+              ),
             ],
           ),
         ),

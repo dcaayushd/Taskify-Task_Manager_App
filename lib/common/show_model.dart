@@ -172,7 +172,7 @@ class AddNewTaskModel extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                         vertical: 14,
                       )),
-                  onPressed: () {},
+                  onPressed: () => Navigator.pop(context),
                   child: const Text('Cancel'),
                 ),
               ),
