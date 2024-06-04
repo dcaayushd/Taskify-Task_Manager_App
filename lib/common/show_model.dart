@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:taskify/provider/radio_provider.dart';
 
 import '../constants/app_styles.dart';
 
@@ -8,13 +10,14 @@ import '../widgets/date_time_widget.dart';
 import '../widgets/radio_list_widget.dart';
 import '../widgets/text_field_widget.dart';
 
-class AddNewTaskModel extends StatelessWidget {
+class AddNewTaskModel extends ConsumerWidget {
   const AddNewTaskModel({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // final radioCategory = ref.watch(radioProvider);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       height: MediaQuery.of(context).size.height * 0.70,
@@ -72,23 +75,35 @@ class AddNewTaskModel extends StatelessWidget {
                 child: RadioListWidget(
                   titleRadio: 'Learning',
                   categoryColor: Colors.green.shade700,
+                  valueInput: 1,
+                  onChangedValue: () => ref.read(radioProvider.notifier).update(
+                        (state) => 1,
+                      ),
                 ),
               ),
               Expanded(
                 child: RadioListWidget(
                   titleRadio: 'Working',
                   categoryColor: Colors.blue.shade700,
+                  valueInput: 2,
+                  onChangedValue: () => ref.read(radioProvider.notifier).update(
+                        (state) => 2,
+                      ),
                 ),
               ),
               Expanded(
                 child: RadioListWidget(
                   titleRadio: 'General',
                   categoryColor: Colors.amberAccent.shade700,
+                  valueInput: 3,
+                  onChangedValue: () => ref.read(radioProvider.notifier).update(
+                        (state) => 3,
+                      ),
                 ),
               ),
             ],
           ),
-
+          const Gap(12),
           //Date and Time Section
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
