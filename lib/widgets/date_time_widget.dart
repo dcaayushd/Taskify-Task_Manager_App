@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
 
 import '../constants/app_styles.dart';
 
 class DateAndTimeWidget extends ConsumerWidget {
-  const DateAndTimeWidget({
-    super.key,
-    required this.titleText,
-    required this.valueText,
-    required this.iconSection,
-    required this.onTap
-  });
+  const DateAndTimeWidget(
+      {super.key,
+      required this.titleText,
+      required this.valueText,
+      required this.iconSection,
+      required this.onTap});
 
   final String titleText;
   final String valueText;
@@ -29,7 +27,9 @@ class DateAndTimeWidget extends ConsumerWidget {
             titleText,
             style: AppStyles.headingOne,
           ),
-          const Gap(6),
+          const SizedBox(
+            height: 6,
+          ),
           Material(
             child: Ink(
               decoration: BoxDecoration(
@@ -51,7 +51,9 @@ class DateAndTimeWidget extends ConsumerWidget {
                   child: Row(
                     children: [
                       Icon(iconSection),
-                      const Gap(6),
+                      const SizedBox(
+                        width: 6,
+                      ),
                       Text(valueText)
                     ],
                   ),

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
 import 'package:taskify/provider/service_provider.dart';
 
 class CardTodoListWidget extends ConsumerWidget {
@@ -117,9 +116,13 @@ class CardTodoListWidget extends ConsumerWidget {
                             Row(
                               children: [
                                 // const Text('Today'),
-                                // const Gap(12),
+                                // const SizedBox(
+                                //   width: 12,
+                                // ),
                                 Text(taskifyData[getIndex].timeTask),
-                                const Gap(12),
+                                const SizedBox(
+                                  width: 12,
+                                ),
                                 Text(taskifyData[getIndex].dateTask),
                               ],
                             ),

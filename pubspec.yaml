@@ -34,7 +34,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.5.1
-  gap: ^3.0.1
   intl: ^0.19.0
 
 dev_dependencies:

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
 
 import '../screens/notification_screen.dart';
 
@@ -75,7 +74,8 @@ class HomeScreen extends ConsumerWidget {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => NotificationScreen()),
+                      builder: (context) => const NotificationScreen(),
+                    ),
                   ),
                   icon: const Icon(
                     CupertinoIcons.bell,
@@ -91,7 +91,9 @@ class HomeScreen extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             children: [
-              const Gap(12),
+              const SizedBox(
+                height: 12,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -138,7 +140,9 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              const Gap(20),
+              const SizedBox(
+                height: 20,
+              ),
               //Card List Task
               ListView.builder(
                 itemCount: taskifyData.value!.length,

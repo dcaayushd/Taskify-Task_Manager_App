@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:taskify/model/taskify_model.dart';
 import 'package:taskify/provider/date_time_provider.dart';
@@ -54,29 +53,39 @@ class AddNewTaskModel extends ConsumerWidget {
             thickness: 1.2,
             color: Colors.grey.shade200,
           ),
-          const Gap(12),
+          const SizedBox(
+            height: 12,
+          ),
           const Text(
             'Tittle Task',
             style: AppStyles.headingOne,
           ),
-          const Gap(6),
+          const SizedBox(
+            height: 6,
+          ),
           TextFieldWidget(
             hintText: 'Add Task Name',
             maxLine: 1,
             txtController: titleController,
           ),
-          const Gap(12),
+          const SizedBox(
+            height: 12,
+          ),
           const Text(
             'Description',
             style: AppStyles.headingOne,
           ),
-          const Gap(6),
+          const SizedBox(
+            height: 6,
+          ),
           TextFieldWidget(
             hintText: 'Add Description',
             maxLine: 5,
             txtController: descriptionController,
           ),
-          const Gap(12),
+          const SizedBox(
+            height: 12,
+          ),
           const Text(
             'Category',
             style: AppStyles.headingOne,
@@ -115,7 +124,9 @@ class AddNewTaskModel extends ConsumerWidget {
               ),
             ],
           ),
-          const Gap(12),
+          const SizedBox(
+            height: 12,
+          ),
           //Date and Time Section
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -142,7 +153,9 @@ class AddNewTaskModel extends ConsumerWidget {
                   }
                 },
               ),
-              const Gap(22),
+              const SizedBox(
+                width: 22,
+              ),
               DateAndTimeWidget(
                 titleText: 'Time',
                 // valueText: 'HH : MM',
@@ -162,7 +175,9 @@ class AddNewTaskModel extends ConsumerWidget {
               ),
             ],
           ),
-          const Gap(12),
+          const SizedBox(
+            height: 12,
+          ),
           Row(
             children: [
               Expanded(
@@ -184,7 +199,9 @@ class AddNewTaskModel extends ConsumerWidget {
                   child: const Text('Cancel'),
                 ),
               ),
-              const Gap(20),
+              const SizedBox(
+                width: 22,
+              ),
               Expanded(
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
