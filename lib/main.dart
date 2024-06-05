@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(),
-        home: const HomeScreen(),
+        home: HomeScreen(),
       ),
     );
   }

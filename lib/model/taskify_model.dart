@@ -7,6 +7,7 @@ class TaskifyModel {
   final String category;
   final String dateTask;
   final String timeTask;
+  final bool isDone;
 
   TaskifyModel({
     this.docID,
@@ -15,6 +16,7 @@ class TaskifyModel {
     required this.category,
     required this.dateTask,
     required this.timeTask,
+    required this.isDone,
   });
 
   Map<String, dynamic> toMap() {
@@ -25,6 +27,7 @@ class TaskifyModel {
       'category': category,
       'dateTask': dateTask,
       'timeTask': timeTask,
+      'isDone': isDone,
     };
   }
 
@@ -36,6 +39,7 @@ class TaskifyModel {
       category: map['category'] as String,
       dateTask: map['dateTask'] as String,
       timeTask: map['timeTask'] as String,
+      isDone: map['isDone'] as bool,
     );
   }
 
@@ -48,6 +52,7 @@ class TaskifyModel {
       category: doc['category'],
       dateTask: doc['dateTask'],
       timeTask: doc['timeTask'],
+      isDone: doc['isDone'],
     );
   }
 }

@@ -226,6 +226,7 @@ class AddNewTaskModel extends ConsumerWidget {
                           category: category,
                           dateTask: ref.read(dateProvider),
                           timeTask: ref.read(timeProvider),
+                          isDone: false,
                         ));
 
                     print('Data is saving');
