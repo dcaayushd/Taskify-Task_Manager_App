@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:taskify/widgets/calender_widget.dart';
 import '../screens/notification_screen.dart';
-
 import '../common/show_model.dart';
 import '../provider/service_provider.dart';
 import '../widgets/card_todo_list_widget.dart';
@@ -30,6 +29,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final taskifyData = ref.watch(fetchStreamProvider);
     final greeting = _getGreeting();
+
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
@@ -65,7 +65,14 @@ class HomeScreen extends ConsumerWidget {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const CalenderWidget();
+                      },
+                    );
+                  },
                   icon: const Icon(
                     CupertinoIcons.calendar,
                   ),
@@ -80,10 +87,10 @@ class HomeScreen extends ConsumerWidget {
                   icon: const Icon(
                     CupertinoIcons.bell,
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -118,11 +125,13 @@ class HomeScreen extends ConsumerWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFD5E8FA),
-                        foregroundColor: Colors.blue.shade400,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8))),
+                      backgroundColor: const Color(0xFFD5E8FA),
+                      foregroundColor: Colors.blue.shade400,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                     onPressed: () => showModalBottomSheet(
                       isScrollControlled: true,
                       shape: RoundedRectangleBorder(
@@ -133,9 +142,6 @@ class HomeScreen extends ConsumerWidget {
                     ),
                     child: const Text(
                       '+ New Task',
-                      // style: TextStyle(
-                      //   color: Colors.grey,
-                      // ),
                     ),
                   ),
                 ],
@@ -143,12 +149,16 @@ class HomeScreen extends ConsumerWidget {
               const SizedBox(
                 height: 20,
               ),
-              //Card List Task
-              ListView.builder(
-                itemCount: taskifyData.value!.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) =>
-                    CardTodoListWidget(getIndex: index),
+              // Handling different states of taskifyData
+              taskifyData.when(
+                data: (data) => ListView.builder(
+                  itemCount: data.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) =>
+                      CardTodoListWidget(getIndex: index),
+                ),
+                loading: () => const CircularProgressIndicator(),
+                error: (error, stack) => Text('Error: $error'),
               ),
             ],
           ),
