@@ -108,6 +108,7 @@ class HomeScreen extends ConsumerWidget {
                         'Today\'s Task',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
+                          fontSize: 18,
                           color: Colors.black,
                         ),
                       ),

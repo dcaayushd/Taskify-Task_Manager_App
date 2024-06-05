@@ -10,4 +10,16 @@ class TaskifyService {
   void addNewTask(TaskifyModel model) {
     taskifyCollection.add(model.toMap());
   }
+
+  //Create
+  void updateTask(String? docID, bool? valueUpdate) {
+    taskifyCollection.doc(docID).update({
+      'isDone': valueUpdate,
+    });
+  }
+
+  //Delete
+   void deleteTask(String? docID) {
+    taskifyCollection.doc(docID).delete();
+  }
 }
