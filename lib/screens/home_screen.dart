@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
+import '../screens/notification_screen.dart';
+
 import '../common/show_model.dart';
 import '../provider/service_provider.dart';
 import '../widgets/card_todo_list_widget.dart';
@@ -70,7 +72,11 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NotificationScreen()),
+                  ),
                   icon: const Icon(
                     CupertinoIcons.bell,
                   ),

@@ -67,7 +67,7 @@ class CardTodoListWidget extends ConsumerWidget {
                         leading: Transform.scale(
                           scale: 1.5,
                           child: Checkbox(
-                            activeColor: Colors.blue,
+                            activeColor: categoryColor,
                             shape: const CircleBorder(),
                             // value: false,
                             value: taskifyData[getIndex].isDone,
