@@ -116,9 +116,11 @@ class CardTodoListWidget extends ConsumerWidget {
                             ),
                             Row(
                               children: [
-                                const Text('Today'),
+                                // const Text('Today'),
+                                // const Gap(12),
+                                Text(taskifyData[getIndex].timeTask),
                                 const Gap(12),
-                                Text(taskifyData[getIndex].timeTask)
+                                Text(taskifyData[getIndex].dateTask),
                               ],
                             ),
                           ],
