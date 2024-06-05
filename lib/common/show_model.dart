@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -13,6 +12,8 @@ import '../constants/app_styles.dart';
 import '../widgets/date_time_widget.dart';
 import '../widgets/radio_list_widget.dart';
 import '../widgets/text_field_widget.dart';
+
+import 'dart:developer' as developer;
 
 class AddNewTaskModel extends ConsumerWidget {
   AddNewTaskModel({
@@ -246,7 +247,7 @@ class AddNewTaskModel extends ConsumerWidget {
                           isDone: false,
                         ));
 
-                    print('Data is saving');
+                    developer.log('Data is saved');
 
                     titleController.clear();
                     descriptionController.clear();
