@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:taskify/model/taskify_model.dart';
 import 'package:taskify/provider/date_time_provider.dart';
 import 'package:taskify/provider/radio_provider.dart';
+import 'package:taskify/provider/service_provider.dart';
 
 import '../constants/app_styles.dart';
 
@@ -13,9 +16,12 @@ import '../widgets/radio_list_widget.dart';
 import '../widgets/text_field_widget.dart';
 
 class AddNewTaskModel extends ConsumerWidget {
-  const AddNewTaskModel({
+  AddNewTaskModel({
     super.key,
   });
+
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,9 +60,10 @@ class AddNewTaskModel extends ConsumerWidget {
             style: AppStyles.headingOne,
           ),
           const Gap(6),
-          const TextFieldWidget(
+          TextFieldWidget(
             hintText: 'Add Task Name',
             maxLine: 1,
+            txtController: titleController,
           ),
           const Gap(12),
           const Text(
@@ -64,9 +71,10 @@ class AddNewTaskModel extends ConsumerWidget {
             style: AppStyles.headingOne,
           ),
           const Gap(6),
-          const TextFieldWidget(
+          TextFieldWidget(
             hintText: 'Add Description',
             maxLine: 5,
+            txtController: descriptionController,
           ),
           const Gap(12),
           const Text(
@@ -192,7 +200,41 @@ class AddNewTaskModel extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                         vertical: 14,
                       )),
-                  onPressed: () {},
+                  onPressed: () {
+                    final getRadioValue = ref.read(radioProvider);
+                    String category = '';
+
+                    switch (getRadioValue) {
+                      case 1:
+                        category = 'Learning';
+                        break;
+
+                      case 2:
+                        category = 'Working';
+                        break;
+
+                      case 3:
+                        category = 'General';
+                        break;
+
+                      // default:
+                    }
+
+                    ref.read(serviceProvider).addNewTask(TaskifyModel(
+                          titleTask: titleController.text,
+                          description: descriptionController.text,
+                          category: category,
+                          dateTask: ref.read(dateProvider),
+                          timeTask: ref.read(timeProvider),
+                        ));
+
+                    print('Data is saving');
+
+                    titleController.clear();
+                    descriptionController.clear();
+                    ref.read(radioProvider.notifier).update((state) => 0);
+                    Navigator.pop(context);
+                  },
                   child: const Text('Create'),
                 ),
               ),

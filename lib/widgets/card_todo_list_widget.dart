@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -28,6 +27,8 @@ class CardTodoListWidget extends StatelessWidget {
             ),
             width: 20,
           ),
+
+          //Wrapped with a container
           Expanded(
               child: Padding(
             padding: const EdgeInsets.symmetric(
