@@ -245,6 +245,7 @@ class AddNewTaskModel extends ConsumerWidget {
                           dateTask: ref.read(dateProvider),
                           timeTask: ref.read(timeProvider),
                           isDone: false,
+                          isArchived: false,
                         ));
 
                     developer.log('Data is saved');
