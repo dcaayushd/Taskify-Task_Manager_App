@@ -23,7 +23,6 @@ class CardTodoListWidget extends ConsumerWidget {
             case 'Learning':
               categoryColor = Colors.green.shade700;
               break;
-
             case 'Working':
               categoryColor = Colors.blue.shade700;
               break;
@@ -51,7 +50,7 @@ class CardTodoListWidget extends ConsumerWidget {
                     ),
                   ),
                   // width: 20,
-                  width: 16,
+                  width: 12,
                 ),
                 Expanded(
                     child: Padding(

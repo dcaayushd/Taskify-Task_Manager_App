@@ -4,22 +4,36 @@ import 'package:taskify/model/taskify_model.dart';
 class TaskifyService {
   final taskifyCollection = FirebaseFirestore.instance.collection('taskify');
 
-  //CRUD
+  // CRUD
 
-  //Create
+  // Create
   void addNewTask(TaskifyModel model) {
     taskifyCollection.add(model.toMap());
   }
 
-  //Create
+  // Update
   void updateTask(String? docID, bool? valueUpdate) {
     taskifyCollection.doc(docID).update({
       'isDone': valueUpdate,
     });
   }
 
-  //Delete
-   void deleteTask(String? docID) {
+  // Delete
+  void deleteTask(String? docID) {
     taskifyCollection.doc(docID).delete();
+  }
+
+  // Archive
+  void archiveTask(String? docID) {
+    taskifyCollection.doc(docID).update({
+      'isArchived': true,
+    });
+  }
+
+  // UnArchive
+  void unArchiveTask(String? docID) {
+    taskifyCollection.doc(docID).update({
+      'isArchived': false,
+    });
   }
 }

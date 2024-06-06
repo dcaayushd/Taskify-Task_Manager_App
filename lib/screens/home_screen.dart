@@ -168,7 +168,6 @@
 //     );
 //   }
 // }
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -203,7 +202,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
   }
 
-  String _filter = 'all';
+  String _filter = 'open';
 
   @override
   Widget build(BuildContext context) {
@@ -342,12 +341,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       data.where((task) => task.isArchived).length;
 
                   return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildCategoryItem('All', allCount, 'all'),
                       _buildCategoryItem('Open', openCount, 'open'),
                       _buildCategoryItem('Closed', closedCount, 'closed'),
                       _buildCategoryItem('Archived', archivedCount, 'archived'),
+                      _buildCategoryItem('All', allCount, 'all'),
                     ],
                   );
                 },
@@ -358,12 +357,63 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 height: 20,
               ),
               taskifyData.when(
-                data: (data) => ListView.builder(
-                  itemCount: _filterTasks(data, _filter).length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) =>
-                      CardTodoListWidget(getIndex: index),
-                ),
+                data: (data) {
+                  final filteredTasks = _filterTasks(data, _filter);
+                  return ListView.builder(
+                    itemCount: filteredTasks.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final task = filteredTasks[index];
+                      return Dismissible(
+                        key: UniqueKey(),
+                        direction: DismissDirection.horizontal,
+                        background: Container(
+                          color: Colors.blue,
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: const Icon(CupertinoIcons.archivebox,
+                              color: Colors.white),
+                        ),
+                        secondaryBackground: _filter == 'archived'
+                            ? Container(
+                                color: Colors.red,
+                                alignment: Alignment.centerRight,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: const Icon(
+                                  CupertinoIcons.delete,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : Container(
+                                color: Colors.red,
+                                alignment: Alignment.centerRight,
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: const Icon(
+                                  CupertinoIcons.delete,
+                                  color: Colors.white,
+                                ),
+                              ),
+                        onDismissed: (direction) {
+                          if (_filter == 'all' ||
+                              _filter == 'open' ||
+                              _filter == 'closed' &&
+                                  direction == DismissDirection.startToEnd) {
+                            ref.read(serviceProvider).archiveTask(task.docID);
+                          } else if (_filter == 'archived' &&
+                              direction == DismissDirection.startToEnd) {
+                            // Unarchive task
+                            ref.read(serviceProvider).unArchiveTask(task.docID);
+                          } else if (direction == DismissDirection.endToStart) {
+                            ref.read(serviceProvider).deleteTask(task.docID);
+                          }
+                        },
+                        child: CardTodoListWidget(getIndex: index),
+                      );
+                    },
+                  );
+                },
                 loading: () => const CircularProgressIndicator(),
                 error: (error, stack) => Text('Error: $error'),
               ),
@@ -383,28 +433,32 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         });
       },
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             label,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
               color: isSelected ? Colors.blue : Colors.grey,
             ),
           ),
           const SizedBox(width: 4),
           Container(
+            height: 20,
+            width: 30,
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             decoration: BoxDecoration(
-              color: isSelected ? Colors.blue : Colors.grey.shade300,
-              // borderRadius: BorderRadius.circular(12),
-              borderRadius: BorderRadius.circular(50),
+              color: isSelected ? Colors.blue : Colors.grey.shade500,
+              borderRadius: BorderRadius.circular(20),
             ),
-            child: Text(
-              count.toString(),
-              style: TextStyle(
-                fontSize: 12,
-                color: isSelected ? Colors.white : Colors.grey.shade700,
+            child: Center(
+              child: Text(
+                count.toString(),
+                style: const TextStyle(
+                  // fontSize: 10,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
