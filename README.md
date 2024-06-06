@@ -1,16 +1,33 @@
-# taskify
+# Taskify
 
-A new Flutter project.
+Taskify is a Flutter application designed to help users manage their tasks efficiently. It provides a user-friendly interface for creating, organizing, and tracking tasks.
+
+## Features
+
+Create and manage tasks
+Mark tasks as complete or archive them
+Filter tasks by status (open, closed, archived)
+View tasks for the current day
+Calendar integration for viewing tasks by date
+Notification system for task reminders
+User profile management
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+- Clone the repository or download the source code.
+- Install the required dependencies by running ```flutter pub get``` in the project directory.
+- Run the app on your preferred device or emulator using ```flutter run```.
 
-A few resources to get you started if this is your first Flutter project:
+## Contributing
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Contributions are welcome! If you'd like to contribute to Taskify, please follow these steps:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Fork the repository.
+- Create a new branch for your feature or bug fix.
+- Make your changes and commit them with descriptive commit messages.
+- Push your changes to your forked repository.
+- Submit a pull request to the main repository.
+
+## License
+
+This project is licensed under the MIT [License](LICENSE).
