@@ -25,12 +25,7 @@ class NotificationScreen extends StatelessWidget {
               color: Colors.grey,
             ),
             SizedBox(height: 20.0),
-            Text('Notifications', style: AppStyles.headingOne
-                // TextStyle(
-                //   fontSize: 24.0,
-                //   fontWeight: FontWeight.bold,
-                // ),
-                ),
+            Text('Notifications', style: AppStyles.headingOne),
           ],
         ),
       ),
