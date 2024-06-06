@@ -84,6 +84,10 @@ class CardTodoListWidget extends ConsumerWidget {
                             decoration: taskifyData[getIndex].isDone
                                 ? TextDecoration.lineThrough
                                 : null,
+                            decorationColor: taskifyData[getIndex].isDone
+                                ? categoryColor
+                                : null,
+                            decorationThickness: 2.0,
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
@@ -95,6 +99,10 @@ class CardTodoListWidget extends ConsumerWidget {
                             decoration: taskifyData[getIndex].isDone
                                 ? TextDecoration.lineThrough
                                 : null,
+                            decorationColor: taskifyData[getIndex].isDone
+                                ? categoryColor
+                                : null,
+                            decorationThickness: 2.0,
                             fontSize: 12,
                           ),
                         ),
