@@ -172,6 +172,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:taskify/screens/profile_screen.dart';
 import 'package:taskify/widgets/calender_widget.dart';
 import '../model/taskify_model.dart';
 import '../screens/notification_screen.dart';
@@ -217,10 +218,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         title: ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Colors.amber.shade200,
+          leading: InkWell(
             radius: 25,
-            child: Image.asset('assets/images/my-avatar.png'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(),
+                ),
+              );
+            },
+            child: CircleAvatar(
+              backgroundColor: Colors.amber.shade200,
+              radius: 25,
+              child: Image.asset('assets/images/my-avatar.png'),
+            ),
           ),
           title: Text(
             greeting,
@@ -447,7 +459,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Container(
             height: 20,
             width: 30,
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
             decoration: BoxDecoration(
               color: isSelected ? Colors.blue : Colors.grey.shade500,
               borderRadius: BorderRadius.circular(20),
@@ -456,7 +468,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: Text(
                 count.toString(),
                 style: const TextStyle(
-                  // fontSize: 10,
+                  fontSize: 10,
                   color: Colors.white,
                 ),
               ),
