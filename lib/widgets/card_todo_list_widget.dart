@@ -50,7 +50,8 @@ class CardTodoListWidget extends ConsumerWidget {
                       bottomLeft: Radius.circular(12),
                     ),
                   ),
-                  width: 20,
+                  // width: 20,
+                  width: 16,
                 ),
                 Expanded(
                     child: Padding(
@@ -87,7 +88,7 @@ class CardTodoListWidget extends ConsumerWidget {
                             decorationColor: taskifyData[getIndex].isDone
                                 ? categoryColor
                                 : null,
-                            decorationThickness: 2.0,
+                            decorationThickness: 4.0,
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
